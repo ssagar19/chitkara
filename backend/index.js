@@ -8,7 +8,9 @@ let app= express();
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
-console.log("hhh")
+app.get('/', (req, res) =>{
+  res.send('server connected')
+})
 
 app.use("/shops", require("./routes/shop"))
 
