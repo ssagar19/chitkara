@@ -23,33 +23,6 @@ app.post("/admin", adminController.login_post);
 app.get("/admin-logout", adminController.logout_get);
 
 
-const requireAuth = (req, res, next) =>{
-  const token1 = req.cookies.jwt;
-  var token2 = false;
-  if(!req.cookies.email){
-    res.send('No user is Authorised')
-  }
-  User.find({email : req.cookies.email}).then(val =>{
-    if(val[0].role === 'admin'){
-      token2 = true;
-      if(token1 && token2){
-        jwt.verify(token1,'kslkdlkhiy8iyiuiuh87y87yhhyg87yugug78uyiy9y87dls', (err, decodedToken) =>{
-          if(err){
-          
-            console.log(err.message);
-          }else{
-            next();
-          }
-        });
-          }
-          else{
-            res.send('404 error no user in authorised');
-          }
-    }
-
-    });
-
-};
 
 app.get('/', (req, res) =>{
   res.send('server connected')
