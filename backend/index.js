@@ -2,7 +2,8 @@ let express = require("express");
 let app= express();
 let mongoose= require("mongoose");
 var cors = require('cors');
-var jwt = require('jsonwebtoken');
+let mw = require('./middlewares')
+console.log(mw)
 const cookieParser = require('cookie-parser');
 const User = require('./model/User');
 
@@ -28,7 +29,7 @@ app.get('/', (req, res) =>{
   res.send('server connected')
 })
 
-app.use("/shops", requireAuth, require("./routes/shop"))
+app.use("/shops", mw.requireAuth, require("./routes/shop"))
 
 
 
